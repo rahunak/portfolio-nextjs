@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import ContactWidget from "@/components/ContactWidget";
 import CVDownload from "@/components/CVDownload";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -54,6 +55,7 @@ export default function RootLayout({
           <ContactWidget />
           <CVDownload />
           <Analytics />
+          <SpeedInsights />
         </ThemeProvider>
       </body>
     </html>
