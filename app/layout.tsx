@@ -5,6 +5,7 @@ import ThemeProvider from "@/components/ThemeProvider";
 import Navbar from "@/components/Navbar";
 import ContactWidget from "@/components/ContactWidget";
 import CVDownload from "@/components/CVDownload";
+import { Analytics } from "@vercel/analytics/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,9 +21,9 @@ export const metadata: Metadata = {
   title: "Zaiko Eugenii Portfolio",
   description: "Full-Stack Developer Portfolio - JavaScript, React, Node.js",
   openGraph: {
-    title: "Зайко Евгений Full-stack Developer telegram@eugeneZaiko",
+    title: "Zaiko Eugenii Full-stack Developer",
     type: "website",
-    url: "https://rahunak.github.io/PortfolioZaiko.github.io/portfolio",
+    url: "https://zaiko-eugene-portfolio.vercel.app",
     images: [
       {
         url: "https://avatars.githubusercontent.com/u/31304532?v=4",
@@ -52,6 +53,7 @@ export default function RootLayout({
           {children}
           <ContactWidget />
           <CVDownload />
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>
