@@ -170,7 +170,7 @@ export default function Home() {
             <span className="text-xl font-semibold">Git</span>
           </a>
           <a
-            href="https://www.linkedin.com/in/rahunak/"
+            href="https://www.linkedin.com/in/eugene-zaiko/"
             target="_blank"
             rel="noopener noreferrer"
             className="flex flex-col items-center gap-2 p-4 rounded-lg border-2 border-transparent hover:border-blue-500 dark:hover:border-blue-400 text-gray-900 dark:text-white hover:text-blue-500 dark:hover:text-blue-400 transition-all hover:-translate-y-1"
