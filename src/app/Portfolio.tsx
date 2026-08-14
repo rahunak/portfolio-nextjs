@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { ArrowUpRight, ArrowDown, Github, Linkedin, Mail, Menu, X, AlertCircle, Send, Phone } from "lucide-react";
+import { motion } from "motion/react";
 
 const projects = [
   {
@@ -9,7 +10,8 @@ const projects = [
     description: "An event-driven ecosystem for generative AI video production. Architected the core orchestration layer to handle thousands of concurrent inference jobs with automated fault tolerance and job prioritization.",
     stack: ["NestJS", "BullMQ", "Redis", "Next.js", "AWS S3", "WebSockets"],
     year: "2026",
-    image: "/src/sources/img/realstream-start-page.webp"
+    image: "/src/sources/img/realstream-start-page.webp",
+    blueprint: "/src/sources/img/realstrem-diagram-dark.svg"
   },
   {
     id: "02",
@@ -18,7 +20,8 @@ const projects = [
     description: "Massive analytical engine for fintech data. Optimized PostgreSQL workloads over 109M+ records, reducing critical query execution time from 1 hour to sub-5 seconds through advanced partitioning.",
     stack: ["PostgreSQL", "PHP 8", "Symfony", "React", "TypeScript"],
     year: "2025",
-    image: "/src/sources/img/da_vinci.webp"
+    image: "/src/sources/img/da_vinci.webp",
+    blueprint: "/src/sources/img/da_vinci-diagram-dark.svg",
   },
   {
     id: "03",
@@ -259,7 +262,7 @@ export default function Portfolio() {
             <div className="flex gap-8 md:gap-16 flex-wrap">
               {[
                 { label: "Experience", value: "5+ yrs" },
-                { label: "Projects", value: "40+" },
+                { label: "Projects", value: "15+" },
                 { label: "Location", value: "Belarus" },
               ].map(({ label, value }) => (
                 <div key={label}>
@@ -338,21 +341,49 @@ export default function Portfolio() {
 
           <div className="grid md:grid-cols-2 gap-4 mt-12">
             {projects.slice(0, 2).map((p) => (
-              <div key={p.id} className="relative aspect-video bg-card overflow-hidden group cursor-pointer">
-                <img
-                  src={p.image}
-                  alt={`${p.name} — ${p.tagline}`}
-                  className="w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-[1.02] transition-all duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-                <div className="absolute bottom-0 left-0 p-6">
+              <div
+                key={p.id}
+                className="relative aspect-video bg-card overflow-hidden group cursor-pointer border border-border/50"
+              >
+                {/* Layer 1: Blueprint (Bottom) */}
+                <motion.div
+                  className="absolute inset-0"
+                  initial={{ opacity: 1, scale: 0.95 }}
+                  whileHover={{ opacity: 0, scale: 1 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                >
+                  <img
+                    src={p.blueprint}
+                    alt={`${p.name} architecture diagram`}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-grid-pattern opacity-20" />
+                </motion.div>
+
+                {/* Layer 2: Cover Image (Top) */}
+                <motion.div
+                  className="absolute inset-0"
+                  initial={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+                  whileHover={{ opacity: 0, scale: 1.1, filter: "blur(4px)" }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                >
+                  <img
+                    src={p.image}
+                    alt={`${p.name} — ${p.tagline}`}
+                    className="w-full h-full object-cover"
+                  />
+                </motion.div>
+
+                {/* Gradient overlay (always visible) */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+                {/* Content: Title + Year (always visible) */}
+                <div className="absolute bottom-0 left-0 p-6 z-10">
                   <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-white/50 mb-2">
                     {p.tagline} — {p.year}
                   </p>
-                  <h3 className="font-heading text-2xl md:text-3xl font-bold text-white">{p.name}</h3>
-                </div>
-                <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <ArrowUpRight size={20} className="text-white" aria-hidden="true" />
+                  <h3 className="font-heading text-2xl md:text-3xl font-bold text-white mb-3">
+                    {p.name}
+                  </h3>
                 </div>
               </div>
             ))}
