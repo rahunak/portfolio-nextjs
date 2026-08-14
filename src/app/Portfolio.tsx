@@ -4,39 +4,39 @@ import { ArrowUpRight, ArrowDown, Github, Linkedin, Mail, Menu, X, AlertCircle, 
 const projects = [
   {
     id: "01",
-    name: "Meridian",
-    tagline: "Climate analytics platform",
-    description: "Real-time data visualization processing satellite telemetry for climate research across 12 countries. 50M data points daily.",
-    stack: ["TypeScript", "React", "D3.js", "PostgreSQL", "AWS"],
+    name: "RealStream",
+    tagline: "AI-Native Media Orchestration Platform",
+    description: "An event-driven ecosystem for generative AI video production. Architected the core orchestration layer to handle thousands of concurrent inference jobs with automated fault tolerance and job prioritization.",
+    stack: ["NestJS", "BullMQ", "Redis", "Next.js", "AWS S3", "WebSockets"],
     year: "2026",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&h=560&fit=crop&auto=format",
+    image: "/src/sources/img/realstream-start-page.webp"
   },
   {
     id: "02",
-    name: "Fable UI",
-    tagline: "Open-source design system",
-    description: "Accessible component library for React. 80+ components with full keyboard navigation and WCAG 2.1 AA compliance. Used by 40+ teams.",
-    stack: ["React", "TypeScript", "Storybook", "Radix UI"],
-    year: "2023",
-    image: "https://images.unsplash.com/photo-1558655146-d09347e92766?w=900&h=560&fit=crop&auto=format",
+    name: "FinData Core",
+    tagline: "High-Load Database Performance Engineering",
+    description: "Massive analytical engine for fintech data. Optimized PostgreSQL workloads over 109M+ records, reducing critical query execution time from 1 hour to sub-5 seconds through advanced partitioning.",
+    stack: ["PostgreSQL", "PHP 8", "Symfony", "React", "TypeScript"],
+    year: "2025",
+    image: "/src/sources/img/da_vinci.webp"
   },
   {
     id: "03",
-    name: "Orbit",
-    tagline: "Real-time collaboration",
-    description: "Multiplayer workspace built on operational transforms. 500 concurrent editors with sub-100ms sync latency.",
-    stack: ["Go", "WebSockets", "Redis", "React", "Next.js"],
-    year: "2023",
-    image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=900&h=560&fit=crop&auto=format",
+    name: "UniGrid",
+    tagline: "Multisite Architecture & Platform Modernization",
+    description: "Orchestrated a massive multi-tenant infrastructure for Tel Aviv University, managing 200+ independent instances. Led the transition from legacy jQuery/CMS logic to a high-performance React-based architecture, improving delivery speed by 30%.",
+    stack: ["Node.js", "React", "Docker", "PHP", "MySQL", "MongoDB"],
+    year: "2024",
+    image: "/src/sources/img/multisite_infra.webp"
   },
   {
     id: "04",
-    name: "Lumen",
-    tagline: "AI content moderation API",
-    description: "High-throughput classification service processing 2M+ requests per day for media platforms in 8 languages.",
-    stack: ["Python", "FastAPI", "PyTorch", "Kubernetes"],
-    year: "2022",
-    image: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=900&h=560&fit=crop&auto=format",
+    name: "Storm - SalesFlow B2B",
+    tagline: "Enterprise Workflow Automation Engine",
+    description: "Custom dynamic workflow engine for large-scale sales teams. Reverse-engineered CRM internals to build non-standard data pipelines, reducing deployment-related failures by 70%.",
+    stack: ["PHP", "SuiteCRM", "Docker", "React", "MySQL"],
+    year: "2023",
+    image: "/src/sources/img/salesflow_crm.webp"
   },
 ];
 
@@ -425,13 +425,19 @@ export default function Portfolio() {
             <div>
               <div className="space-y-5 mb-14">
                 <p className="text-xl leading-relaxed text-muted-foreground">
-                  {"I'm a full-stack engineer with 5+ years building products at the intersection of developer tooling and end-user experience."}
+                  {"I build systems that stay fast at scale and ship on time."}
                 </p>
+
                 <p className="text-xl leading-relaxed text-muted-foreground">
-                  My work has shipped to millions of users at companies like PixelPlex, Syberry, and Linnovate. I care about performance, accessibility, and the craft of well-structured software.
+                  {
+                    "Over 5+ years at PixelPlex, Syberry, and Linnovate, I've owned architecture at scale: 216 isolated databases, 109M+ records queried in under 5 seconds, and a production LLM media-processing engine shipped in 60 days."
+                  }
                 </p>
+
                 <p className="text-xl leading-relaxed text-muted-foreground">
-                  Outside work I contribute to open source, write about software architecture on my blog, and occasionally speak at conferences.
+                  {
+                    "I work across Node.js / TypeScript, PHP / Symfony, and React — with a focus on clean boundaries, measurable performance, and AI features that are safe to run in production."
+                  }
                 </p>
               </div>
 
