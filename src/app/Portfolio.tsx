@@ -120,14 +120,14 @@ const experience = [
   },
 ];
 
-type FormData = { name: string; email: string; message: string };
+type FormData = { email: string; message: string };
 type FormErrors = Partial<FormData>;
 
 export default function Portfolio() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
-  const [formData, setFormData] = useState<FormData>({ name: "", email: "", message: "" });
+  const [formData, setFormData] = useState<FormData>({ email: "", message: "" });
   const [errors, setErrors] = useState<FormErrors>({});
   const [sent, setSent] = useState(false);
 
@@ -149,7 +149,6 @@ export default function Portfolio() {
 
   const validate = (): FormErrors => {
     const errs: FormErrors = {};
-    if (!formData.name.trim()) errs.name = "Name is required";
     if (!formData.email.trim()) errs.email = "Email is required";
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) errs.email = "Invalid email address";
     if (!formData.message.trim()) errs.message = "Message is required";
@@ -165,7 +164,7 @@ export default function Portfolio() {
     }
     setErrors({});
     setSent(true);
-    setFormData({ name: "", email: "", message: "" });
+    setFormData({ email: "", message: "" });
     setTimeout(() => setSent(false), 4000);
   };
 
@@ -629,28 +628,6 @@ export default function Portfolio() {
             </div>
 
             <form onSubmit={handleSubmit} aria-label="Contact form" noValidate className="space-y-6">
-              {/* Name */}
-              <div>
-                <label htmlFor="contact-name" className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground block mb-2">
-                  Name
-                </label>
-                <input
-                  id="contact-name"
-                  type="text"
-                  value={formData.name}
-                  onChange={(e) => { setFormData({ ...formData, name: e.target.value }); setErrors({ ...errors, name: undefined }); }}
-                  aria-describedby={errors.name ? "error-name" : undefined}
-                  aria-invalid={!!errors.name}
-                  placeholder="Your name"
-                  className={`w-full bg-transparent px-4 py-3 text-foreground placeholder:text-muted-foreground/40 focus:outline-none transition-colors duration-200 text-sm border ${errors.name ? "border-destructive" : "border-border focus:border-foreground/60"
-                    }`}
-                />
-                {errors.name && (
-                  <p id="error-name" role="alert" className="flex items-center gap-1.5 font-mono text-[10px] text-destructive mt-2">
-                    <AlertCircle size={10} aria-hidden="true" /> {errors.name}
-                  </p>
-                )}
-              </div>
 
               {/* Email */}
               <div>
