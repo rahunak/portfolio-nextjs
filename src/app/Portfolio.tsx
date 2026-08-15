@@ -262,7 +262,7 @@ export default function Portfolio() {
             <div className="flex gap-8 md:gap-16 flex-wrap">
               {[
                 { label: "Experience", value: "5+ yrs" },
-                { label: "Projects", value: "15+" },
+                { label: "Projects", value: "20+" },
                 { label: "Location", value: "Belarus" },
               ].map(({ label, value }) => (
                 <div key={label}>
