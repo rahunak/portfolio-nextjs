@@ -6,8 +6,8 @@ const projects = [
   {
     id: "01",
     name: "RealStream",
-    tagline: "AI-Native Media Orchestration Platform",
-    description: "An event-driven ecosystem for generative AI video production. Architected the core orchestration layer to handle thousands of concurrent inference jobs with automated fault tolerance and job prioritization.",
+    tagline: "AI-Native Media Orchestration",
+    description: "Event-driven ecosystem for generative AI video. Architected orchestration layer handling thousands of concurrent inference jobs with queue-based prioritization, automated fault tolerance, and real-time WebSocket status tracking.",
     stack: ["NestJS", "BullMQ", "Redis", "Next.js", "AWS S3", "WebSockets"],
     year: "2026",
     image: "/src/sources/img/realstream-start-page.webp",
@@ -15,9 +15,9 @@ const projects = [
   },
   {
     id: "02",
-    name: "FinData Core",
-    tagline: "High-Load Database Performance Engineering",
-    description: "Massive analytical engine for fintech data. Optimized PostgreSQL workloads over 109M+ records, reducing critical query execution time from 1 hour to sub-5 seconds through advanced partitioning.",
+    name: "Perseus",
+    tagline: "109M+ Records. 720x Faster.",
+    description: "Industrial IoT analytics for water treatment telemetry. Designed hardware-aware partitioning strategy routing enterprise-tier clients (with expensive monitoring devices) to dedicated partitions, reducing critical query time from 1 hour to sub-5 seconds across 109M+ records.",
     stack: ["PostgreSQL", "PHP 8", "Symfony", "React", "TypeScript"],
     year: "2025",
     image: "/src/sources/img/da_vinci.webp",
@@ -25,31 +25,78 @@ const projects = [
   },
   {
     id: "03",
-    name: "UniGrid",
-    tagline: "Multisite Architecture & Platform Modernization",
-    description: "Orchestrated a massive multi-tenant infrastructure for Tel Aviv University, managing 200+ independent instances. Led the transition from legacy jQuery/CMS logic to a high-performance React-based architecture, improving delivery speed by 30%.",
-    stack: ["Node.js", "React", "Docker", "PHP", "MySQL", "MongoDB"],
+    name: "Experts & Partners",
+    tagline: "216+ Databases. Zero Downtime.",
+    description: "Multi-tenant infrastructure for Tel Aviv University managing 216+ independent databases. Led migration from legacy jQuery/CMS to React/Node.js architecture, increasing development throughput by 30%.",
+    stack: ["PHP", "Express.js", "React", "Docker", "MongoDB"],
     year: "2024",
     image: "/src/sources/img/multisite_infra.webp"
   },
   {
     id: "04",
-    name: "Storm - SalesFlow B2B",
-    tagline: "Enterprise Workflow Automation Engine",
-    description: "Custom dynamic workflow engine for large-scale sales teams. Reverse-engineered CRM internals to build non-standard data pipelines, reducing deployment-related failures by 70%.",
-    stack: ["PHP", "SuiteCRM", "Docker", "React", "MySQL"],
+    name: "Storm",
+    tagline: "Auto Resale with Buy-Back Guarantee",
+    description: "B2C automotive resale platform with guaranteed vehicle buy-back. Reverse-engineered legacy CRM internals to build dynamic workflows and integrate 3rd-party services, reducing deployment failures by 70% via Docker containerization.",
+    stack: ["PHP", "React", "Docker", "MySQL"],
     year: "2023",
     image: "/src/sources/img/salesflow_crm.webp"
   },
 ];
 
-const skills = [
-  { category: "Languages", items: ["TypeScript", "PHP", "JavaScript"] },
-  { category: "Frontend", items: ["React", "Next.js", "Vue"] },
-  { category: "Backend", items: ["Node.js", "NestJS", "Symfony"] },
-  { category: "Infrastructure", items: ["AWS", "Azure", "Docker", "Kubernetes"] },
-  { category: "Databases", items: ["PostgreSQL", "Redis", "MongoDB", "MariaDB"] },
-  { category: "Tooling", items: ["Git", "CI/CD", "Figma", "Grafana"] },
+
+
+export interface SkillGroup {
+  category: string;
+  items: string[];
+}
+
+export const skills: SkillGroup[] = [
+  {
+    category: "Backend",
+    items: [
+      "Node.js (NestJS)",
+      "PHP (Symfony)",
+      "BullMQ / RabbitMQ",
+      "REST & GraphQL APIs",
+      "Microservices",
+    ],
+  },
+  {
+    category: "Frontend",
+    items: [
+      "React / Next.js",
+      "TypeScript",
+      "SSR & WebSockets",
+      "Redux Toolkit",
+      "Tailwind CSS",
+    ],
+  },
+  {
+    category: "Data & Caching",
+    items: [
+      "PostgreSQL",
+      "Redis",
+      "Query Optimization",
+    ],
+  },
+  {
+    category: "DevOps & Cloud",
+    items: [
+      "AWS (S3, EC2)",
+      "Docker / Kubernetes",
+      "GitHub Actions",
+      "Nginx",
+    ],
+  },
+  {
+    category: "Tools & Methodologies",
+    items: [
+      "Git",
+      "CI/CD",
+      "Jest / Playwright",
+      "Agile / Scrum",
+    ],
+  },
 ];
 
 const experience = [
