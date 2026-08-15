@@ -130,6 +130,8 @@ export default function Portfolio() {
   const [formData, setFormData] = useState<FormData>({ email: "", message: "" });
   const [errors, setErrors] = useState<FormErrors>({});
   const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -155,17 +157,39 @@ export default function Portfolio() {
     return errs;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const errs = validate();
     if (Object.keys(errs).length > 0) {
       setErrors(errs);
       return;
     }
+
     setErrors({});
-    setSent(true);
-    setFormData({ email: "", message: "" });
-    setTimeout(() => setSent(false), 4000);
+    setServerError(null);
+    setLoading(true);
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to send message');
+      }
+
+      setSent(true);
+      setFormData({ email: "", message: "" });
+      setTimeout(() => setSent(false), 4000);
+    } catch (error) {
+      setServerError(error instanceof Error ? error.message : 'Failed to send message');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const navLinks = ["work", "skills", "about", "contact"];
@@ -675,11 +699,19 @@ export default function Portfolio() {
                 )}
               </div>
 
+              {serverError && (
+                <div role="alert" className="flex items-center gap-2 p-3 border border-destructive bg-destructive/10 text-destructive text-sm">
+                  <AlertCircle size={14} aria-hidden="true" />
+                  <span>{serverError}</span>
+                </div>
+              )}
+
               <button
                 type="submit"
+                disabled={loading || sent}
                 className="w-full font-mono text-[11px] tracking-[0.2em] uppercase py-4 bg-accent text-accent-foreground hover:opacity-90 active:opacity-75 transition-opacity duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring disabled:opacity-40 disabled:cursor-not-allowed"
               >
-                {sent ? "Message sent ✓" : "Send message"}
+                {loading ? "Sending..." : sent ? "Message sent ✓" : "Send message"}
               </button>
             </form>
           </div>
