@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Portfolio from "@/components/Portfolio";
 
-const SITE_URL = "https://eugenezaiko.com";
+const SITE_URL = "https://safesync.dev";
 const NAME = "Eugene Zaiko";
 const ROLE = "Senior Full-Stack Engineer";
 const DESCRIPTION =
@@ -49,6 +49,9 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: SITE_URL,
+    types: {
+      "application/llms+txt": `${SITE_URL}/llms.txt`,
+    },
   },
   openGraph: {
     type: "profile",

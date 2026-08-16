@@ -2,8 +2,18 @@
 User-agent: *
 Allow: /
 
+# Allow AI crawlers explicitly (for AI search engines)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
 # Block API routes (not useful for search engines)
 Disallow: /api/
 
 # Sitemap location
-Sitemap: https://eugenezaiko.com/sitemap.xml
+Sitemap: https://safesync.dev/sitemap.xml
