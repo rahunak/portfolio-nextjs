@@ -23,15 +23,15 @@ export async function POST(request: NextRequest) {
     }
 
     const { data, error } = await resend.emails.send({
-      from: 'Portfolio Contact <onboarding@resend.dev>',
+      from: 'Portfolio Contact <zaiko.eugene@safesync.dev>',
       to: ['zaiko.eugene@gmail.com'],
       replyTo: email,
       subject: `New contact from ${email}`,
       text: `From: ${email}\n\nMessage:\n${message}`,
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #333;">New Portfolio Contact</h2>
-          <p><strong>From:</strong> ${email}</p>
+          <h2 style="color: #333;">Тебе поступило письмо с портфолио-сайта!</h2>
+          <p><strong>От кого:</strong> ${email}</p>
           <div style="margin-top: 20px; padding: 15px; background: #f5f5f5; border-left: 4px solid #c8ff4b;">
             <p style="margin: 0; white-space: pre-wrap;">${message}</p>
           </div>
