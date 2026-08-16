@@ -1,0 +1,48 @@
+# Eugene Zaiko - Senior Full-Stack Engineer
+
+> Senior Full-Stack Engineer specializing in Node.js, NestJS, React, and Next.js. 5+ years building high-performance systems: event-driven architectures, PostgreSQL optimization (109M+ rows), and production AI applications.
+
+## About
+
+I build fast, thoughtful software — from developer tools and APIs to products used by millions. I care deeply about performance, accessibility, and craft.
+
+Over 5+ years at PixelPlex, Syberry, and Linnovate, I've owned architecture at scale: 216 isolated databases, 109M+ records queried in under 5 seconds, and a production LLM media-processing engine shipped in 60 days.
+
+## Key Projects
+
+- **RealStream** (2026): AI-Native Media Orchestration - Event-driven ecosystem for generative AI video with queue-based prioritization and real-time WebSocket tracking
+- **Perseus** (2025): 109M+ Records, 720x Faster - Industrial IoT analytics with hardware-aware PostgreSQL partitioning
+- **Experts & Partners** (2024): 216+ Databases, Zero Downtime - Multi-tenant infrastructure for Tel Aviv University
+- **Storm** (2023): Auto Resale Platform with guaranteed vehicle buy-back
+
+## Technical Expertise
+
+**Backend**: Node.js (NestJS), PHP (Symfony), BullMQ/RabbitMQ, REST & GraphQL APIs, Microservices
+
+**Frontend**: React/Next.js, TypeScript, SSR & WebSockets, Redux Toolkit, Tailwind CSS
+
+**Data**: PostgreSQL, Redis, Query Optimization
+
+**DevOps**: AWS (S3, EC2), Docker/Kubernetes, GitHub Actions, Nginx
+
+## Experience
+
+- **Senior Software Engineer** at PixelPlex (2025): Architected event-driven AI media platform from scratch, launching production-ready MVP in 2 months
+- **Software Engineer** at Syberry (2024-2025): Optimized high-load PostgreSQL systems (109M+ records) from 1-hour queries to sub-5 seconds
+- **Fullstack Engineer** at Linnovate (2021-2024): Managed complex multisite infrastructure across 216+ databases
+
+## Contact
+
+- Email: zaiko.eugene@gmail.com
+- Phone: +375257810998
+- GitHub: https://github.com/rahunak
+- LinkedIn: https://www.linkedin.com/in/eugene-zaiko
+- Telegram: https://t.me/rahunak
+
+## Links
+
+- Portfolio: https://eugenezaiko.com
+- Work: https://eugenezaiko.com/#work
+- Skills: https://eugenezaiko.com/#skills
+- About: https://eugenezaiko.com/#about
+- Contact: https://eugenezaiko.com/#contact

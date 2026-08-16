@@ -294,7 +294,7 @@ export default function Portfolio() {
           <div className="grid md:grid-cols-2 gap-6 items-start mt-10 md:mt-16">
             <div>
               <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-muted-foreground mb-6 md:mb-10">
-                Full-Stack Engineer · Belarus
+                Senior Full-Stack Engineer
               </p>
               <h1
                 className="font-heading font-bold leading-[0.88] tracking-tight"
@@ -544,19 +544,32 @@ export default function Portfolio() {
                 </p>
               </div>
 
-              <ol aria-label="Work experience" className="border-t border-border">
+              <ol className="border-t border-border">
                 {experience.map((job, i) => (
-                  <li key={i} className="grid md:grid-cols-[180px_1fr] gap-4 py-7 border-b border-border">
+                  <li
+                    key={i}
+                    itemScope
+                    itemType="https://schema.org/OrganizationRole"
+                    className="grid md:grid-cols-[180px_1fr] gap-4 py-7 border-b border-border"
+                  >
                     <div>
-                      <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-muted-foreground">
+                      <p
+                        className="font-mono text-[10px] tracking-[0.18em] uppercase text-muted-foreground"
+                        itemProp="startDate"
+                      >
                         {job.period}
                       </p>
-                      <p className="font-mono text-[11px] text-accent mt-1.5 tracking-wide">
+                      <p
+                        className="font-mono text-[11px] text-accent mt-1.5 tracking-wide"
+                        itemProp="roleName"
+                      >
                         {job.company}
                       </p>
                     </div>
                     <div>
-                      <p className="font-medium text-foreground">{job.role}</p>
+                      <p className="font-medium text-foreground" itemProp="description">
+                        {job.role}
+                      </p>
                       <p className="text-sm text-muted-foreground mt-1.5 leading-relaxed">{job.description}</p>
                     </div>
                   </li>

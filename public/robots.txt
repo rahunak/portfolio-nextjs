@@ -1,0 +1,9 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Block API routes (not useful for search engines)
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://eugenezaiko.com/sitemap.xml
