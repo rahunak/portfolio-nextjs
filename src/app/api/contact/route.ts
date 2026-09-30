@@ -1,7 +1,19 @@
 import { Resend } from 'resend';
 import { NextRequest, NextResponse } from 'next/server';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Ленивая инициализация: Resend требует ключ в конструкторе, но билд не должен
+// падать, если RESEND_API_KEY не задан (задан только на проде в Vercel env).
+let _resend: Resend | null = null;
+function getResend(): Resend {
+  if (!_resend) {
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+      throw new Error('RESEND_API_KEY is not configured');
+    }
+    _resend = new Resend(apiKey);
+  }
+  return _resend;
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -22,7 +34,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { data, error } = await resend.emails.send({
+    const { data, error } = await getResend().emails.send({
       from: 'Portfolio Contact <zaiko.eugene@safesync.dev>',
       to: ['zaiko.eugene@gmail.com'],
       replyTo: email,

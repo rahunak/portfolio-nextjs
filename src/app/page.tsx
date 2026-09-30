@@ -60,20 +60,12 @@ export const metadata: Metadata = {
     title: `${NAME} — ${ROLE}`,
     description: DESCRIPTION,
     locale: "en_US",
-    images: [
-      {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: `${NAME} — Senior Full-Stack Engineer specializing in Node.js, React, and PostgreSQL`,
-      },
-    ],
+    // Картинка генерируется динамически из src/app/opengraph-image.tsx
   },
   twitter: {
     card: "summary_large_image",
     title: `${NAME} — ${ROLE}`,
     description: DESCRIPTION,
-    images: ["/og-image.jpg"],
   },
 };
 
