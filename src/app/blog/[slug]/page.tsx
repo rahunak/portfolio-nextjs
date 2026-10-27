@@ -214,7 +214,7 @@ export default async function BlogPage({
               href="mailto:zaiko.eugene@gmail.com"
               className="hidden md:flex items-center gap-1.5 font-mono text-[11px] tracking-[0.15em] uppercase bg-accent text-accent-foreground px-4 py-2 hover:opacity-90 transition-opacity"
             >
-              Hire me <ArrowUpRight size={12} strokeWidth={2.5} />
+              Contact <ArrowUpRight size={12} strokeWidth={2.5} />
             </a>
           </nav>
         </header>

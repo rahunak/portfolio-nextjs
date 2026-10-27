@@ -19,6 +19,130 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "postgres-partitioning-109-million-rows",
+    title: "PostgreSQL Partitioning at 109M Rows: What Actually Made Queries 720x Faster",
+    description:
+      "A critical report on 109M+ telemetry rows took an hour. Hardware-aware partitioning cut it to under 5 seconds. The real decisions behind a 720x speedup, no theory.",
+    keywords: [
+      "PostgreSQL partitioning",
+      "query optimization",
+      "IoT telemetry",
+      "large tables",
+      "partition pruning",
+    ],
+    datePublished: "2026-10-27",
+    dateModified: "2026-10-27",
+    lead:
+      "Partitioning a 109M-row PostgreSQL table took a critical report from about one hour to under 5 seconds. The speedup did not come from splitting the table into pieces; it came from matching the partition layout to the queries that actually run, so pruning removes most data before the planner reads a page.",
+    blocks: [
+      {
+        type: "p",
+        text: "The nearest large table I have worked on is Perseus, an industrial IoT analytics system for water treatment telemetry. Continuous readings from facility device fleets had accumulated past 109 million rows, and the nightly critical report, the one operations staff actually depended on, took about an hour to build. This is the story of how that query time was cut by a factor of 720, from a strategy on paper that mostly did not survive contact with the data.",
+      },
+      { type: "h2", text: "Profile first, partition second" },
+      {
+        type: "p",
+        text: "The instinctive move is to shard or partition by date the moment a table gets large. For this table that would have been wrong. Reading the actual query workload showed two very different access profiles:",
+      },
+      {
+        type: "list",
+        items: [
+          "Enterprise-tier clients with high-value monitoring devices who read their own history almost exclusively, over long time ranges.",
+          "Operations staff who scan recent windows across the entire fleet for alarms and anomalies.",
+        ],
+      },
+      {
+        type: "p",
+        text: "Partitioning only by time would serve the operational scans well and do nothing for the enterprise clients: every one of their queries would still fan out across every time partition. The partition key has to serve the dominant access path, and there were two.",
+      },
+      { type: "h2", text: "The hardware-aware partition key" },
+      {
+        type: "p",
+        text: "The insight that unlocked the design was in the hardware itself. Monitoring devices are not all equal: enterprise-tier clients run expensive, high-frequency monitors, while the rest of the fleet reports more cheaply and in bursts. So the partition layout followed the hardware tiers: enterprise-grade devices went to dedicated partitions, and the operational time-window scans got their own layout aligned with the ingest pattern.",
+      },
+      {
+        type: "p",
+        text: "With that layout, partition pruning eliminates the rest of the fleet for enterprise queries before the planner touches a single heap page. That is where the 720x came from: not from faster reads of 109M rows, but from not reading most of them.",
+      },
+      { type: "h2", text: "Migrate without an outage window" },
+      {
+        type: "p",
+        text: "A schema change on a live system is rarer than it sounds, because the old table keeps serving reads. The migration ran on the existing PHP 8 / Symfony services, executing incrementally while the legacy table remained the source of truth. Queries were flipped to the partitioned tables only after validation, in a controlled cutover rather than a weekend freeze. The dashboards built on React and TypeScript meant the improvement was visible to non-engineers the same day, not just in EXPLAIN plans.",
+      },
+      { type: "h2", text: "A minimal pruning-friendly example" },
+      {
+        type: "p",
+        text: "The general shape of a pruning-friendly layout, simplified for illustration: ensure your query predicate includes the partition key, or the planner has no reason to skip partitions.",
+      },
+      {
+        type: "code",
+        code: `CREATE TABLE telemetry (
+  device_id     bigint      NOT NULL,
+  read_at       timestamptz NOT NULL,
+  metrics       jsonb,
+  PRIMARY KEY (device_id, read_at) -- must include BOTH partition keys
+) PARTITION BY RANGE (read_at);
+
+-- level 1: monthly partitions serve the operational scans.
+-- The partition is declared partitioned itself (multi-level):
+CREATE TABLE telemetry_2026_10
+  PARTITION OF telemetry
+  FOR VALUES FROM ('2026-10-01') TO ('2026-11-01')
+  PARTITION BY RANGE (device_id);
+
+-- level 2: enterprise-tier devices get their own leaf, so client
+-- queries prune everything else away
+CREATE TABLE telemetry_2026_10_enterprise
+  PARTITION OF telemetry_2026_10
+  FOR VALUES FROM (900000) TO (MAXVALUE);
+
+CREATE TABLE telemetry_2026_10_rest
+  PARTITION OF telemetry_2026_10
+  FOR VALUES FROM (MINVALUE) TO (900000);`,
+      },
+      {
+        type: "p",
+        text: "Note the primary key includes the partition key. PostgreSQL requires partition keys to be part of any unique constraint, and finding this out mid-migration is expensive.",
+      },
+      { type: "h2", text: "What partitioning will not fix" },
+      {
+        type: "list",
+        items: [
+          "Missing indexes. A sequential scan in one partition is still a sequential scan.",
+          "Too many partitions. Thousands of tiny partitions slow planning and can regress both load and queries; the cost curve is real and documented in the PostgreSQL community.",
+          "Application-level inefficiency. No schema layout rescues N+1 query loops.",
+          "Wrong partition key. This whole article exists because by-date was not the right key.",
+        ],
+      },
+      {
+        type: "p",
+        text: "Results, in numbers: 109M+ rows queried in under 5 seconds, a 720x faster critical path, and a migration with no downtime window. I write about real production systems at safesync.dev. If your reports are measured in the wrong unit of time, this is exactly the kind of engagement I take on: reach out by email or Telegram.",
+      },
+    ],
+    faq: [
+      {
+        question: "How much data do I need before partitioning a PostgreSQL table?",
+        answer:
+          "The row count number is a weak signal; the query profile is the real threshold. Partitioning pays off when queries can reliably exclude most partitions and indexes no longer fit or behave well in memory. A 50M-row table with narrow queries often needs nothing; a 50M-row table with full-scan reports may already need it. Profile the workload first.",
+      },
+      {
+        question: "How many partitions is too many in PostgreSQL?",
+        answer:
+          "Planning overhead grows with partition count, and thousands of partitions can measurably slow both queries and data loading. The right number depends on partition pruning benefit versus planning cost; review data retention patterns and consolidate partitions when the warehouse slowly drifts. Running on a recent PostgreSQL version also reduces overhead significantly.",
+      },
+      {
+        question: "What partition key should I choose?",
+        answer:
+          "The one your dominant queries filter on. For this 109M-row telemetry table, partitioning by date alone would have failed: enterprise clients query by device tier over long ranges. Matching the layout to hardware tiers is what produced the 720x speedup. Choose by reading the real access patterns, not by convention.",
+      },
+      {
+        question: "Can I partition a large table without downtime?",
+        answer:
+          "Yes, if you accept a staged migration: create the partitioned layout, backfill incrementally while the legacy table keeps serving reads, validate, then flip queries in a controlled cutover. The Perseus migration ran this way on PHP 8 / Symfony services with no outage window. The risky pattern is doing it as a single weekend swap without parallel validation.",
+      },
+    ],
+  },
+  {
     slug: "bullmq-at-scale",
     title: "NestJS + BullMQ at Scale: What Breaks First and How to Fix It",
     description:

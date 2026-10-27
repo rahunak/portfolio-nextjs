@@ -17,7 +17,8 @@
 
 ## Writing
 
-- [NestJS + BullMQ at Scale: What Breaks First and How to Fix It](https://safesync.dev/blog/bullmq-at-scale): Production lessons from scale-testing event-driven NestJS systems: retry storms, job loss, starvation and the design fixes that hold.
+- [NestJS + BullMQ at Scale: What Breaks First and How to Fix It](https://safesync.dev/blog/bullmq-at-scale): Production lessons from event-driven NestJS systems: retry storms, job loss, starvation and the design fixes that hold.
+- [PostgreSQL Partitioning at 109M Rows: What Actually Made Queries 720x Faster](https://safesync.dev/blog/postgres-partitioning-109-million-rows): Hardware-aware partitioning for a live telemetry system: profile-first design, multi-level pruning, outage-free migration.
 
 ## Experience
 

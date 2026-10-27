@@ -238,7 +238,7 @@ export default function Portfolio() {
             href="mailto:zaiko.eugene@gmail.com"
             className="hidden md:flex items-center gap-1.5 font-mono text-[11px] tracking-[0.15em] uppercase bg-accent text-accent-foreground px-4 py-2 hover:opacity-90 active:opacity-75 transition-opacity duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
           >
-            Hire me <ArrowUpRight size={12} strokeWidth={2.5} />
+            Contact <ArrowUpRight size={12} strokeWidth={2.5} />
           </a>
 
           {/* Mobile hamburger */}
