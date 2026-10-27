@@ -8,12 +8,16 @@
 - Primary stack: TypeScript, Node.js (NestJS), React (Next.js), PostgreSQL, Redis, BullMQ/RabbitMQ, AWS, Docker.
 - Proven track record: sub-5s queries on 109M+ records, production LLM media pipeline shipped in 60 days, zero-downtime migrations across 216+ tenant databases.
 
-## Selected Projects
+## Selected Projects (full case studies)
 
-- [RealStream](https://safesync.dev/#work): AI-native media orchestration. Event-driven NestJS/BullMQ platform handling thousands of concurrent inference jobs with WebSocket status tracking.
-- [Perseus](https://safesync.dev/#work): Industrial IoT analytics. Hardware-aware PostgreSQL partitioning strategy reducing 1-hour queries to sub-5 seconds across 109M+ records.
-- [Experts & Partners](https://safesync.dev/#work): Multi-tenant infrastructure for Tel Aviv University managing 216+ isolated PostgreSQL databases. Full-stack modernization from legacy jQuery to React/Node.js.
-- [Storm](https://safesync.dev/#work): B2C automotive resale platform with buy-back guarantee. Legacy CRM reverse-engineering + Docker containerization reducing deployment failures by 70%.
+- [RealStream](https://safesync.dev/work/realstream): AI-native media orchestration. Event-driven NestJS/BullMQ platform handling thousands of concurrent inference jobs with WebSocket status tracking. Production MVP shipped in 60 days.
+- [Perseus](https://safesync.dev/work/perseus): Industrial IoT analytics. Hardware-aware PostgreSQL partitioning strategy reducing 1-hour queries to sub-5 seconds across 109M+ records.
+- [Experts & Partners](https://safesync.dev/work/experts-and-partners): Multi-tenant infrastructure for Tel Aviv University managing 216+ isolated databases. Full-stack modernization from legacy jQuery to React/Node.js, zero downtime.
+- [Storm](https://safesync.dev/work/storm): B2C automotive resale platform with buy-back guarantee. Legacy CRM reverse-engineering + Docker containerization reducing deployment failures by 70%.
+
+## Writing
+
+- [NestJS + BullMQ at Scale: What Breaks First and How to Fix It](https://safesync.dev/blog/bullmq-at-scale): Production lessons from scale-testing event-driven NestJS systems: retry storms, job loss, starvation and the design fixes that hold.
 
 ## Experience
 

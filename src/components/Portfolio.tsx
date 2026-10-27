@@ -1,8 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { useState, useEffect } from "react";
 import { ArrowUpRight, ArrowDown, Mail, Menu, X, AlertCircle, Phone, Github, Send } from "lucide-react";
 import { motion } from "motion/react";
+import { trackEvent } from "@/lib/analytics";
 import { LinkedinIcon } from "./icons/LinkedinIcon";
 
 
@@ -10,6 +12,7 @@ const projects = [
   {
     id: "01",
     name: "RealStream",
+    slug: "realstream",
     tagline: "AI-Native Media Orchestration",
     description: "Event-driven ecosystem for generative AI video. Architected orchestration layer handling thousands of concurrent inference jobs with queue-based prioritization, automated fault tolerance, and real-time WebSocket status tracking.",
     stack: ["NestJS", "BullMQ", "Redis", "Next.js", "AWS S3", "WebSockets"],
@@ -20,6 +23,7 @@ const projects = [
   {
     id: "02",
     name: "Perseus",
+    slug: "perseus",
     tagline: "109M+ Records. 720x Faster.",
     description: "Industrial IoT analytics for water treatment telemetry. Designed hardware-aware partitioning strategy routing enterprise-tier clients (with expensive monitoring devices) to dedicated partitions, reducing critical query time from 1 hour to sub-5 seconds across 109M+ records.",
     stack: ["PostgreSQL", "PHP 8", "Symfony", "React", "TypeScript"],
@@ -30,6 +34,7 @@ const projects = [
   {
     id: "03",
     name: "Experts & Partners",
+    slug: "experts-and-partners",
     tagline: "216+ Databases. Zero Downtime.",
     description: "Multi-tenant infrastructure for Tel Aviv University managing 216+ independent databases. Led migration from legacy jQuery/CMS to React/Node.js architecture, increasing development throughput by 30%.",
     stack: ["PHP", "Express.js", "React", "Docker", "MongoDB"],
@@ -39,6 +44,7 @@ const projects = [
   {
     id: "04",
     name: "Storm",
+    slug: "storm",
     tagline: "Auto Resale with Buy-Back Guarantee",
     description: "B2C automotive resale platform with guaranteed vehicle buy-back. Reverse-engineered legacy CRM internals to build dynamic workflows and integrate 3rd-party services, reducing deployment failures by 70% via Docker containerization.",
     stack: ["PHP", "React", "Docker", "MySQL"],
@@ -185,6 +191,8 @@ export default function Portfolio() {
       }
 
       setSent(true);
+      // GA4 — успешная отправка контактной формы
+      trackEvent("generate_lead", { form: "contact" });
       setFormData({ email: "", message: "" });
       setTimeout(() => setSent(false), 4000);
     } catch (error) {
@@ -377,8 +385,9 @@ export default function Portfolio() {
 
           <div className="border-t border-border" role="list" aria-label="Project list">
             {projects.map((p) => (
-              <div
+              <Link
                 key={p.id}
+                href={`/work/${p.slug}`}
                 role="listitem"
                 onMouseEnter={() => setHoveredProject(p.id)}
                 onMouseLeave={() => setHoveredProject(null)}
@@ -407,14 +416,15 @@ export default function Portfolio() {
                   <span className="font-mono text-[11px] text-muted-foreground">{p.year}</span>
                   <ArrowUpRight size={16} className="text-muted-foreground group-hover:text-foreground transition-colors duration-150" aria-hidden="true" />
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
 
           <div className="grid md:grid-cols-2 gap-4 mt-12">
             {projects.slice(0, 2).map((p) => (
-              <div
+              <Link
                 key={p.id}
+                href={`/work/${p.slug}`}
                 className="relative aspect-video bg-card overflow-hidden group cursor-pointer border border-border/50"
               >
                 {/* Layer 1: Blueprint (Bottom) */}
@@ -457,7 +467,7 @@ export default function Portfolio() {
                     {p.name}
                   </h3>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </section>
