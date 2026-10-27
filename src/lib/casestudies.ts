@@ -15,7 +15,9 @@ export interface CaseStudy {
   year: string;
   company: string;
   role: string;
-  image: string;
+  /** Optional screenshot; when absent, the case page renders a generated banner
+   *  and /work/[slug]/opengraph-image provides the social card. */
+  image?: string;
   imageAlt: string;
   /** SEO title tag, ~50-60 chars */
   title: string;
@@ -166,7 +168,6 @@ export const caseStudies: CaseStudy[] = [
     year: "2024",
     company: "Linnovate",
     role: "Infrastructure management & full-stack modernization",
-    image: "/multisite_infra.webp",
     imageAlt:
       "Multi-tenant infrastructure diagram for the Experts & Partners platform",
     title: "216 Tenant Databases, Zero-Downtime Legacy Modernization",
@@ -215,7 +216,6 @@ export const caseStudies: CaseStudy[] = [
     year: "2023",
     company: "Linnovate",
     role: "Full-stack development & deployment",
-    image: "/salesflow_crm.webp",
     imageAlt:
       "Storm automotive resale platform built around a buy-back guarantee",
     title: "Storm: B2C Auto Resale on a Reverse-Engineered Legacy CRM",

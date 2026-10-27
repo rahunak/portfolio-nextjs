@@ -82,8 +82,8 @@ function PostJsonLd({ slug }: { slug: string }) {
           {
             "@type": "ListItem",
             position: 2,
-            name: "Home",
-            item: `${SITE_URL}/`,
+            name: "Writing",
+            item: `${SITE_URL}/#writing`,
           },
           {
             "@type": "ListItem",
@@ -221,6 +221,17 @@ export default async function BlogPage({
 
         <main id="main-content" className="max-w-2xl mx-auto px-6 py-14 md:py-20">
           <article>
+            <nav
+              aria-label="Breadcrumb"
+              className="font-mono text-[11px] tracking-[0.15em] uppercase text-muted-foreground mb-6"
+            >
+              <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
+              <span aria-hidden="true"> / </span>
+              <Link href="/#writing" className="hover:text-foreground transition-colors">Writing</Link>
+              <span aria-hidden="true"> / </span>
+              <span className="text-foreground" aria-current="page">{p.label}</span>
+            </nav>
+
             <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-muted-foreground mb-6">
               Engineering notes — {p.dateModified}
             </p>

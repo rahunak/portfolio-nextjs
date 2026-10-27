@@ -38,7 +38,7 @@ export async function generateMetadata({
       locale: "en_US",
       publishedTime: "2026-10-27",
       authors: AUTHOR.name,
-      images: [{ url: c.image, alt: c.imageAlt }],
+      images: c.image ? [{ url: c.image, alt: c.imageAlt }] : undefined,
     },
     twitter: {
       card: "summary_large_image",
@@ -174,6 +174,17 @@ export default async function CasePage({
         </header>
 
         <main id="main-content" className="max-w-3xl mx-auto px-6 py-14 md:py-20">
+          <nav
+            aria-label="Breadcrumb"
+            className="font-mono text-[11px] tracking-[0.15em] uppercase text-muted-foreground mb-6"
+          >
+            <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
+            <span aria-hidden="true"> / </span>
+            <Link href="/#work" className="hover:text-foreground transition-colors">Work</Link>
+            <span aria-hidden="true"> / </span>
+            <span className="text-foreground" aria-current="page">{c.name}</span>
+          </nav>
+
           <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-muted-foreground mb-6">
             Case study — {c.year} — {c.company}
           </p>
@@ -197,11 +208,34 @@ export default async function CasePage({
             ))}
           </div>
 
-          <img
-            src={c.image}
-            alt={c.imageAlt}
-            className="w-full aspect-video object-cover border border-border mb-14"
-          />
+          {c.image ? (
+            <img
+              src={c.image}
+              alt={c.imageAlt}
+              className="w-full aspect-video object-cover border border-border mb-14"
+            />
+          ) : (
+            <div
+              role="img"
+              aria-label={c.imageAlt}
+              className="w-full aspect-video border border-border bg-card mb-14 flex flex-col justify-between p-6 md:p-12"
+            >
+              <div>
+                <h2
+                  className="font-heading font-bold tracking-tight leading-none"
+                  style={{ fontSize: "clamp(3rem, 8vw, 6rem)" }}
+                >
+                  {c.name}
+                </h2>
+                <p className="font-mono text-accent text-sm md:text-lg tracking-wide mt-4 md:mt-6">
+                  {c.tagline}
+                </p>
+              </div>
+              <p className="font-mono text-[11px] md:text-xs text-muted-foreground tracking-[0.15em] uppercase">
+                {c.company} — {c.year} — {c.role}
+              </p>
+            </div>
+          )}
 
           <section aria-labelledby="problem">
             <h2

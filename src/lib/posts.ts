@@ -8,6 +8,8 @@ export type Block =
 export interface Post {
   slug: string;
   title: string;
+  /** Short display label for lists (homepage Writing section) */
+  label: string;
   description: string;
   keywords: string[];
   datePublished: string;
@@ -21,6 +23,7 @@ export const posts: Post[] = [
   {
     slug: "postgres-partitioning-109-million-rows",
     title: "PostgreSQL Partitioning at 109M Rows: What Actually Made Queries 720x Faster",
+    label: "PostgreSQL Partitioning at 109M Rows",
     description:
       "A critical report on 109M+ telemetry rows took an hour. Hardware-aware partitioning cut it to under 5 seconds. The real decisions behind a 720x speedup, no theory.",
     keywords: [
@@ -145,6 +148,7 @@ CREATE TABLE telemetry_2026_10_rest
   {
     slug: "bullmq-at-scale",
     title: "NestJS + BullMQ at Scale: What Breaks First and How to Fix It",
+    label: "NestJS + BullMQ at Scale",
     description:
       "I shipped an event-driven NestJS + BullMQ pipeline to production in 60 days. What actually breaks first at scale: retry storms, lost jobs, queue starvation, and the fixes that hold.",
     keywords: [

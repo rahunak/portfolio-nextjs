@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { ArrowUpRight, ArrowDown, Mail, Menu, X, AlertCircle, Phone, Github, Send } from "lucide-react";
 import { motion } from "motion/react";
 import { trackEvent } from "@/lib/analytics";
+import { posts } from "@/lib/posts";
 import { LinkedinIcon } from "./icons/LinkedinIcon";
 
 
@@ -202,7 +203,7 @@ export default function Portfolio() {
     }
   };
 
-  const navLinks = ["work", "skills", "about", "contact"];
+  const navLinks = ["work", "skills", "about", "writing", "contact"];
 
   return (
     <div className="min-h-screen bg-background text-foreground font-sans antialiased">
@@ -601,6 +602,50 @@ export default function Portfolio() {
                 </p>
               </div>
             </div>
+          </div>
+        </section>
+
+        <div className="border-t border-border mx-6 md:mx-12" />
+
+        <section
+          id="writing"
+          aria-label="Engineering articles"
+          className="px-6 md:px-12 py-20 md:py-28 scroll-mt-20"
+        >
+          <div className="flex items-baseline justify-between mb-14">
+            <h2
+              className="font-heading font-bold leading-none tracking-tight"
+              style={{ fontSize: "clamp(2.5rem, 7vw, 6rem)" }}
+            >
+              Writing
+            </h2>
+            <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground hidden md:block" aria-hidden="true">
+              04 — Engineering notes
+            </p>
+          </div>
+
+          <div className="border-t border-border" role="list" aria-label="Article list">
+            {posts.map((p, i) => (
+              <Link
+                key={p.slug}
+                href={`/blog/${p.slug}`}
+                role="listitem"
+                className="group border-b border-border py-7 grid grid-cols-[40px_1fr_auto] md:grid-cols-[56px_1fr_auto] gap-4 md:gap-8 items-center cursor-pointer transition-all duration-200 hover:pl-3 focus-within:pl-3"
+              >
+                <span className="font-mono text-[10px] text-muted-foreground tracking-[0.15em]" aria-hidden="true">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <div>
+                  <h3
+                    className="font-heading text-2xl md:text-3xl font-bold group-hover:text-accent transition-colors duration-150"
+                  >
+                    {p.label}
+                  </h3>
+                  <p className="text-sm text-muted-foreground mt-1 max-w-2xl">{p.description}</p>
+                </div>
+                <ArrowUpRight size={16} className="text-muted-foreground group-hover:text-foreground transition-colors duration-150" aria-hidden="true" />
+              </Link>
+            ))}
           </div>
         </section>
 
